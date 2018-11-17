@@ -1,0 +1,16 @@
+{
+    "SandBox": {
+        "Endpoint": "https://api-sandbox.rev.com",
+        "ClientAPIKey": "",
+        "UserAPIKey": "",
+        "UserEmail": "",
+        "UserPassword": ""
+    },
+    "Production": {
+        "Endpoint": "https://api-sandbox.rev.com",
+        "ClientAPIKey": "",
+        "UserAPIKey": "",
+        "UserEmail": "",
+        "UserPassword": ""
+    }
+}
