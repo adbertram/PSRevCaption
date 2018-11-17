@@ -3,12 +3,7 @@ $script:configurationFilePath = "$PSScriptRoot\configuration.json"
 function Get-PSRevCaptionConfiguration {
 	[CmdletBinding()]
 	param
-	(
-		[Parameter(Mandatory)]
-		[ValidateNotNullOrEmpty()]
-		[ValidateSet('Sandbox', 'Production')]
-		[string]$Endpoint
-	)
+	()
 	
 	$ErrorActionPreference = 'Stop'
 
@@ -21,13 +16,15 @@ function Get-PSRevCaptionConfiguration {
 
 	try {
 		$config = Get-Content -Path $script:configurationFilePath | ConvertFrom-Json
-
+		
 		foreach ($item in 'ClientApiKey', 'UserApiKey', 'UserEmail', 'UserPassword') {
-			if ($config.$Endpoint.$item) {
-				$config.$Endpoint.$item = decrypt($config.$Endpoint.$item)
+			'SandBox', 'Production' | ForEach-Object {
+				if ($config.$_.$item) {
+					$config.$_.$item = decrypt($config.$_.$item)
+				}
 			}
 		}
-		$config.$Endpoint
+		$config
 	} catch {
 		Write-Error $_.Exception.Message
 	}
